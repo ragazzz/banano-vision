@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SigatoScan · Diagnóstico comparativo de hoja de plátano</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+<div class="scanlines" aria-hidden="true"></div>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <div class="brand">
+      <span class="brand-mark">⌗</span>
+      <span class="brand-name">SigatoScan</span>
+    </div>
+    <div class="eyebrow">VGG16 &middot; DenseNet121 &middot; Xception</div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section class="hero">
+    <h1>Diagnóstico comparativo de<br><span class="hl">hoja de plátano</span></h1>
+    <p class="sub">Una misma muestra, tres arquitecturas de red neuronal. Compara qué tan seguro está cada modelo y si coinciden en el diagnóstico.</p>
+  </section>
+
+  <nav class="main-tabs" role="tablist" aria-label="Secciones">
+    <button class="main-tab active" data-view="input" role="tab" aria-selected="true">
+      <span class="main-tab-num">01</span> Muestra
+    </button>
+    <button class="main-tab" data-view="results" role="tab" aria-selected="false" disabled id="resultsTabBtn">
+      <span class="main-tab-num">02</span> Resultados
+    </button>
+  </nav>
+
+  <section class="view active" id="view-input">
+
+    <section class="capture-panel" id="capturePanel">
+
+      <div class="tabs" role="tablist">
+        <button class="tab active" data-tab="upload" role="tab" aria-selected="true">Subir foto</button>
+        <button class="tab" data-tab="camera" role="tab" aria-selected="false">Tomar foto</button>
+      </div>
+
+      <div class="tab-panel active" id="panel-upload">
+        <label class="dropzone" id="dropzone" for="fileInput">
+          <div class="reticle">
+            <span class="corner tl"></span><span class="corner tr"></span>
+            <span class="corner bl"></span><span class="corner br"></span>
+            <div class="dropzone-msg">
+              <strong>Arrastra una imagen aquí</strong>
+              <span>o haz clic para elegir un archivo — JPG, PNG, WEBP</span>
+            </div>
+          </div>
+        </label>
+        <input type="file" id="fileInput" accept="image/*" hidden>
+      </div>
+
+      <div class="tab-panel" id="panel-camera">
+        <div class="reticle" id="cameraReticle">
+          <span class="corner tl"></span><span class="corner tr"></span>
+          <span class="corner bl"></span><span class="corner br"></span>
+          <video id="video" autoplay playsinline muted></video>
+          <div class="camera-msg" id="cameraMsg">Toca «Activar cámara» para comenzar</div>
+        </div>
+        <div class="camera-controls">
+          <button class="btn ghost" id="startCamBtn" type="button">Activar cámara</button>
+          <button class="btn ghost" id="shotBtn" type="button" disabled>Tomar foto</button>
+        </div>
+      </div>
+
+      <div class="preview-row" id="previewRow" hidden>
+        <div class="reticle preview-frame">
+          <span class="corner tl"></span><span class="corner tr"></span>
+          <span class="corner bl"></span><span class="corner br"></span>
+          <img id="previewImg" alt="Muestra seleccionada">
+        </div>
+        <div class="preview-actions">
+          <span class="preview-label">MUESTRA LISTA</span>
+          <button class="btn primary" id="analyzeBtn" type="button">Analizar muestra</button>
+          <button class="btn text" id="clearBtn" type="button">Elegir otra</button>
+        </div>
+      </div>
+
+      <p class="error-msg" id="errorMsg" hidden></p>
+    </section>
+
+    <section class="loading" id="loading" hidden>
+      <div class="spinner" aria-hidden="true"></div>
+      <span id="loadingText">Analizando muestra con los 3 modelos…</span>
+    </section>
+
+  </section>
+
+  <section class="view" id="view-results">
+
+    <section class="results" id="results">
+
+      <div class="results-head">
+        <div class="results-head-left">
+          <h2>Resultados</h2>
+          <span class="consensus-tag" id="consensusTag"></span>
+        </div>
+        <button class="btn ghost" id="newSampleBtn" type="button">＋ Nueva muestra</button>
+      </div>
+
+      <div class="results-sample" id="resultsSample">
+        <img id="resultsSampleImg" alt="Muestra analizada">
+      </div>
+
+      <div class="cards" id="cards"><!-- inyectado por JS --></div>
+
+      <div class="info-section" id="infoSection" hidden>
+        <h3 class="info-heading">Ficha informativa</h3>
+        <p class="info-disclaimer">Información educativa de referencia — no sustituye el criterio de un ingeniero agrónomo ni de la autoridad fitosanitaria local.</p>
+        <div class="info-cards" id="infoCards"><!-- inyectado por JS --></div>
+      </div>
+
+    </section>
+
+  </section>
+
+</main>
+
+<canvas id="captureCanvas" hidden></canvas>
+
+<footer class="foot">
+  <span>Proyecto de comparación de arquitecturas CNN &mdash; VGG16 / DenseNet121 / Xception</span>
+</footer>
+
+<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>

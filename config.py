@@ -15,7 +15,7 @@ CLASS_NAMES = [
 # Nombres "bonitos" para mostrar en la interfaz (puedes editar el texto libremente,
 # el ORDEN debe mantenerse igual al de CLASS_NAMES)
 CLASS_DISPLAY_NAMES = {
-    "Cordana": "Cordana (Cordana musae)",
+    "Cordana": "Cordana (Neocordana musae)",
     "Healthy": "Hoja sana",
     "Panama Disease": "Mal de Panamá (Fusarium oxysporum f. sp. cubense)",
     "Yellow and Black Sigatoka": "Sigatoka amarilla / negra (Mycosphaerella spp.)",

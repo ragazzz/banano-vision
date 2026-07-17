@@ -1,8 +1,3 @@
-"""
-Ejecuta los 3 modelos sobre la misma imagen y devuelve resultados
-en un formato listo para comparar en la interfaz.
-"""
-
 import time
 
 from config import MODELS_CONFIG, CLASS_NAMES, CLASS_DISPLAY_NAMES
